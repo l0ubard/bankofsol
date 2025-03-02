@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of SOL - Solana Token</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+</head>
+<body>
+    <!-- Loader/Intro Screen -->
+    <div class="loader-container" id="loader">
+        <!-- Initial Loading Screen -->
+        <div class="bank-loading" id="bankLoading">
+            <img src="logo.jpg" alt="Bank of SOL Logo" class="loader-logo">
+            <h2 class="loader-title">Bank of SOL</h2>
+            <p class="connecting-text">Connecting to secure banking system...</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="connection-logs" id="connectionLogs">
+                <p>Initializing secure connection...</p>
+            </div>
+        </div>
+        
+        <!-- Welcome Screen (shown after loading) -->
+        <div class="loader-content" id="welcomeScreen" style="display: none;">
+            <img src="logo.jpg" alt="Bank of SOL Logo" class="loader-logo">
+            <h2 class="loader-title">Welcome to the Bank of Solana</h2>
+            <p class="loader-question">Are you ready to make $BANK?</p>
+            
+            <div class="loader-buttons">
+                <button id="stayPoorBtn" class="loader-btn stay-poor-btn">STAY POOR</button>
+                <button id="apeBtn" class="loader-btn ape-btn">APE</button>
+            </div>
+        </div>
+        
+        <!-- Door animation removed as per client request -->
+        
+        <div class="poor-message" id="poorMessage">
+            <p>You've chosen to stay poor. Goodbye!</p>
+        </div>
+    </div>
+    
+    <!-- Main Website Content (initially hidden) -->
+    <div class="main-content" id="mainContent" style="display: none;">
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Bank of SOL Logo" class="logo">
+            <h1>Bank of SOL</h1>
+        </div>
+        <div class="social-links">
+            <a href="https://x.com/Bank_of_SOL" target="_blank" class="social-btn">
+                <i class="fab fa-x-twitter"></i> <span class="social-text">Twitter</span>
+            </a>
+            <a href="https://t.me/BankOfSol" target="_blank" class="social-btn">
+                <i class="fab fa-telegram"></i> <span class="social-text">Telegram</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content full-width" data-aos="fade-up">
+            <div class="hero-header">
+                <h2>Welcome to Bank of SOL</h2>
+                <p class="subtitle">The Premier Banking Solution on Solana Blockchain</p>
+                <div class="contract-address">
+                    <p>Contract Address:</p>
+                    <div class="address-container">
+                        <span id="contract">3HhTmpVHafVmDWWEnYGzZh2XnPGREdPReWxwP2AobANK</span>
+                        <button onclick="copyAddress()" class="copy-btn">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Trading Widgets Container -->
+            <div class="trading-widgets-container">
+                <!-- Raydium Widget -->
+                <div class="widget-container raydium-container" data-aos="fade-right">
+                    <h3>Buy $BANKOFSOL Now</h3>
+                    <p class="widget-description">Purchase Bank of SOL tokens directly with SOL using Raydium's swap interface</p>
+                    <div class="raydium-widget">
+                        <iframe 
+                            src="https://raydium.io/swap/?inputCurrency=sol&outputCurrency=3HhTmpVHafVmDWWEnYGzZh2XnPGREdPReWxwP2AobANK&fixed=in&exactAmount=0.1" 
+                            frameborder="0"
+                            width="100%"
+                            height="500px"
+                            allow="clipboard-write"
+                            class="raydium-iframe">
+                        </iframe>
+                    </div>
+                    <div class="widget-note">
+                        <i class="fas fa-info-circle"></i> 
+                        <span>Connect your Solana wallet to complete the purchase</span>
+                    </div>
+                </div>
+                
+                <!-- DexScreener Chart -->
+                <div class="widget-container chart-container" data-aos="fade-left">
+                    <h3>Live Price Chart</h3>
+                    <p class="widget-description">Real-time price action and trading volume for Bank of SOL token</p>
+                    <div class="chart-widget">
+                        <iframe 
+                            src="https://dexscreener.com/solana/3HhTmpVHafVmDWWEnYGzZh2XnPGREdPReWxwP2AobANK?embed=1&theme=dark" 
+                            frameborder="0"
+                            width="100%"
+                            height="500px"
+                            class="chart-iframe">
+                        </iframe>
+                    </div>
+                    <div class="widget-note">
+                        <i class="fas fa-chart-line"></i> 
+                        <span>Powered by DexScreener - Real-time market data</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scrolling Banner -->
+    <div class="scrolling-banner">
+        <div class="banner-content">
+            HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <!-- Tokenomics Section -->
+    <section class="tokenomics" id="tokenomics">
+        <!-- Starry background applied via CSS -->
+        
+        <div class="section-header">
+            <h2 class="section-title" data-aos="fade-up">Tokenomics</h2>
+            <div class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-university gold-icon-sm"></i>
+                <p>The Financial Architecture of Bank of SOL</p>
+            </div>
+        </div>
+        
+        <div class="tokenomics-intro" data-aos="fade-up" data-aos-delay="200">
+            <div class="intro-content">
+                <h3><i class="fas fa-landmark"></i> The Premier DeFi Banking Solution on Solana</h3>
+                <p>Bank of SOL is designed with a robust tokenomic structure to ensure long-term stability, growth, and value for all stakeholders. Our economic model combines traditional banking principles with innovative blockchain technology to create a sustainable financial ecosystem.</p>
+                <div class="key-metrics">
+                    <div class="metric">
+                        <span class="metric-value">1B</span>
+                        <span class="metric-label">Total Supply</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">2%</span>
+                        <span class="metric-label">Transaction Fee</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-value">2 Years</span>
+                        <span class="metric-label">Liquidity Lock</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tokenomics-container">
+            <div class="tokenomics-card" data-aos="flip-left" data-aos-delay="100">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-coins gold-icon"></i>
+                        <h3>Total Supply</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>1,000,000,000 BANKOFSOL</p>
+                        <p class="card-note">Fixed supply - No inflation</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tokenomics-card" data-aos="flip-left" data-aos-delay="200">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-chart-pie gold-icon"></i>
+                        <h3>Distribution</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>50% Liquidity Pool<br>20% Development<br>15% Marketing<br>10% Team<br>5% Reserves</p>
+                        <p class="card-note">Balanced allocation for sustainable growth</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tokenomics-card" data-aos="flip-left" data-aos-delay="300">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-lock gold-icon"></i>
+                        <h3>Security</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>Liquidity locked for 2 years<br>Team tokens vested for 12 months<br>Contract audited</p>
+                        <p class="card-note">Your assets, secured</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tokenomics-card" data-aos="flip-left" data-aos-delay="400">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <i class="fas fa-hand-holding-usd gold-icon"></i>
+                        <h3>Taxes</h3>
+                    </div>
+                    <div class="card-back">
+                        <p>2% Buy Tax<br>2% Sell Tax</p>
+                        <p class="card-note">Funds marketing, development, and liquidity</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tokenomics-features" data-aos="fade-up">
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <h4>Anti-Whale Measures</h4>
+                <p>Transaction limits prevent market manipulation by large holders</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-exchange-alt"></i>
+                <h4>Liquidity Generation</h4>
+                <p>A portion of each transaction strengthens the liquidity pool</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-chart-line"></i>
+                <h4>Deflationary Mechanism</h4>
+                <p>Token burns reduce supply over time, increasing scarcity</p>
+            </div>
+        </div>
+        
+        <div class="tokenomics-chart-container" data-aos="zoom-in">
+            <h3 class="chart-title"><i class="fas fa-chart-pie"></i> Token Allocation</h3>
+            <div class="tokenomics-chart">
+                <canvas id="tokenomicsChart"></canvas>
+            </div>
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: rgba(212, 175, 55, 0.8);"></span>
+                    <span class="legend-text">Liquidity Pool (50%)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: rgba(255, 215, 0, 0.8);"></span>
+                    <span class="legend-text">Development (20%)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: rgba(184, 134, 11, 0.8);"></span>
+                    <span class="legend-text">Marketing (15%)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: rgba(218, 165, 32, 0.8);"></span>
+                    <span class="legend-text">Team (10%)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: rgba(238, 232, 170, 0.8);"></span>
+                    <span class="legend-text">Reserves (5%)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scrolling Banner -->
+    <div class="scrolling-banner">
+        <div class="banner-content">
+            HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp; HOLD $BANK AND GET REWARD &nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+
+    <!-- Roadmap Section -->
+    <section class="roadmap" id="roadmap">
+        <!-- Starry background applied via CSS -->
+        
+        <div class="section-header">
+            <h2 class="section-title" data-aos="fade-up">Strategic Roadmap</h2>
+            <div class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-map-marked-alt gold-icon-sm"></i>
+                <p>Building the Future of Decentralized Banking</p>
+            </div>
+        </div>
+        
+        <div class="roadmap-intro" data-aos="fade-up" data-aos-delay="200">
+            <div class="intro-content">
+                <h3><i class="fas fa-compass"></i> Our Vision for Bank of SOL</h3>
+                <p>Bank of SOL is committed to revolutionizing the financial landscape by bringing traditional banking services to the Solana blockchain. Our strategic roadmap outlines our journey from launch to becoming the premier decentralized banking solution in the crypto space.</p>
+            </div>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-dot">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Q1 2025</div>
+                    <h3>Phase 1: Foundation</h3>
+                    <p>Establishing the core infrastructure and community</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Token Launch on Solana</li>
+                        <li><i class="fas fa-check-circle"></i> Website Launch</li>
+                        <li><i class="fas fa-check-circle"></i> Community Building</li>
+                        <li><i class="fas fa-check-circle"></i> Initial Marketing Campaign</li>
+                        <li><i class="fas fa-check-circle"></i> Liquidity Pool Establishment</li>
+                        <li><i class="fas fa-check-circle"></i> Security Audit Completion</li>
+                    </ul>
+                    <div class="milestone-badge">Current Stage</div>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-dot">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Q2-Q3 2025</div>
+                    <h3>Phase 2: Growth</h3>
+                    <p>Expanding our reach and enhancing our offerings</p>
+                    <ul>
+                        <li><i class="fas fa-coins"></i> CEX Listings</li>
+                        <li><i class="fas fa-handshake"></i> Strategic Partnerships</li>
+                        <li><i class="fas fa-piggy-bank"></i> Staking Platform Launch</li>
+                        <li><i class="fas fa-users"></i> Community Expansion</li>
+                        <li><i class="fas fa-vote-yea"></i> Governance System Implementation</li>
+                        <li><i class="fas fa-shield-alt"></i> Enhanced Security Measures</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="timeline-dot">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Q4 2025 - Q1 2026</div>
+                    <h3>Phase 3: Innovation</h3>
+                    <p>Introducing revolutionary DeFi banking solutions</p>
+                    <ul>
+                        <li><i class="fas fa-university"></i> DeFi Banking Platform</li>
+                        <li><i class="fas fa-tractor"></i> Yield Farming Ecosystem</li>
+                        <li><i class="fas fa-mobile-alt"></i> Mobile App Development</li>
+                        <li><i class="fas fa-project-diagram"></i> Cross-Chain Integration</li>
+                        <li><i class="fas fa-credit-card"></i> Crypto-Backed Loans</li>
+                        <li><i class="fas fa-robot"></i> AI-Powered Financial Advisor</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-dot">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Q2-Q4 2026</div>
+                    <h3>Phase 4: Expansion</h3>
+                    <p>Scaling globally and integrating with traditional finance</p>
+                    <ul>
+                        <li><i class="fas fa-ad"></i> Global Marketing Campaign</li>
+                        <li><i class="fas fa-exchange-alt"></i> Major Exchange Listings</li>
+                        <li><i class="fas fa-landmark"></i> Banking Services Integration</li>
+                        <li><i class="fas fa-building"></i> Institutional Partnerships</li>
+                        <li><i class="fas fa-file-contract"></i> Regulatory Compliance Framework</li>
+                        <li><i class="fas fa-hands-helping"></i> Financial Inclusion Initiatives</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="roadmap-vision" data-aos="fade-up">
+            <div class="vision-content">
+                <h3><i class="fas fa-binoculars"></i> Beyond the Horizon</h3>
+                <p>Our long-term vision extends beyond these phases. We aim to create a comprehensive financial ecosystem that bridges the gap between traditional banking and decentralized finance, making financial services more accessible, efficient, and equitable for everyone.</p>
+                <div class="vision-features">
+                    <div class="vision-feature">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure</span>
+                    </div>
+                    <div class="vision-feature">
+                        <i class="fas fa-bolt"></i>
+                        <span>Fast</span>
+                    </div>
+                    <div class="vision-feature">
+                        <i class="fas fa-globe"></i>
+                        <span>Global</span>
+                    </div>
+                    <div class="vision-feature">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Private</span>
+                    </div>
+                    <div class="vision-feature">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <span>Accessible</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.jpg" alt="Bank of SOL Logo" class="logo-small">
+                <h3>Bank of SOL</h3>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#tokenomics">Tokenomics</a>
+                <a href="#roadmap">Roadmap</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://x.com/Bank_of_SOL" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://t.me/BankOfSol" target="_blank"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Bank of SOL. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
